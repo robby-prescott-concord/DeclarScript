@@ -1,11 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import os
 import time
 import subprocess
-from ..terminal_utilities import termcolor
-from termcolor import colored
-from terminal_utilities import terminalsize
-from ..terminalsize import get_terminal_size
+from DeclarScript.terminal_utilities.termcolor import colored
+from DeclarScript.terminal_utilities.terminalsize import get_terminal_size
 from subprocess import Popen, PIPE
 
 terminalWidth, terminalHeight = get_terminal_size()
@@ -58,22 +56,6 @@ def check_and_run_backups(self, branch_name, return_code) :
     else :
         print(colored('No backup command list detected for failed command: ', 'yellow') + colored(str(self.command), 'cyan'))
 
-def check_and_run_backupsOLD_FOR_REFERENCE_DELETE_LATER(self, branch_name) :
-    print_full_bar()
-    print(' ')
-    if self.backup_command_list :
-        print(colored('Backup command list was detected for failed command: ', 'green') + colored(str(self.command), 'cyan'))
-        new_branch_name = branch_name + '/(' + self.command + ')'
-        print(colored('Running backup commands on the backup branch: ', 'green') + colored(str(new_branch_name), 'green'))
-        run_commands(self.backup_command_list, new_branch_name)
-        print_full_bar()
-        print(' ')
-        print(colored('Finished backup command list for command: ', 'green') + colored(str(self.command), 'cyan'))
-        print(colored('Returning to parent branch: ', 'green') + colored(branch_name, 'green'))
-    else :
-        print(colored('No backup command list detected for failed command: ', 'yellow') + colored(str(self.command), 'cyan'))
-
-
 def add_prompt_responses_and_run_command(self, branch_name) :
     if self.prompt_responses :
         print(colored("Automatic Terminal Prompt Responses: ", 'yellow') + str(self.prompt_responses))
@@ -82,7 +64,7 @@ def add_prompt_responses_and_run_command(self, branch_name) :
             responses += pr + os.linesep
 
         p = Popen(self.command, shell=True, stdin=PIPE)
-        p.stdin.write(responses)
+        p.communicate(responses.encode())
         return_code = p.wait()
         return return_code
 
@@ -92,16 +74,17 @@ def add_prompt_responses_and_run_command(self, branch_name) :
 
 # constructor for each command
 class Command():
-    def __init__(self, command='', message='', retries=0, critical=True, visible=True, sleep_between_retries=0, backup_command_list=[], prompt_responses=[], return_code_backup_command_lists=[]):
+    def __init__(self, command='', message='', critical=True, retries=0, sleep_between_retries=0, visible=True, backup_command_list=[], return_code_backup_command_lists=[], prompt_responses=[]):
         self.command = command
         self.message = message
-        self.retries = retries
         self.critical = critical
-        self.visible = visible
+        self.retries = retries
         self.sleep_between_retries = sleep_between_retries
+        self.visible = visible
         self.backup_command_list = backup_command_list
-        self.prompt_responses = prompt_responses
         self.return_code_backup_command_lists = return_code_backup_command_lists
+        self.prompt_responses = prompt_responses
+
 
     # runs an individual command
     # returns 0 on success
@@ -148,10 +131,10 @@ class Command():
                 print(colored("\n~" + self.message, 'magenta') + colored('\n' + branch_name + '>>> ', 'green') + colored(self.command, 'cyan'))
 
             times_tried += 1
-
             return_code = add_prompt_responses_and_run_command(self, branch_name)
-            print(colored('\nReturn Code: ', 'yellow') + str(return_code))
 
+            if self.visible :
+                print(colored('\nReturn Code: ', 'yellow') + str(return_code))
 
         return 0
 

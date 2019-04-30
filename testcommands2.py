@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 import os
-from ..DeclarScript_auto_commands import DeclarScript
-from DeclarScript import Command
-from DeclarScript import run_commands
+from DeclarScript import Command, run_commands
 
 dddd_backups = [
     Command('ls -l', '~listing all the files in the current directory:'),
