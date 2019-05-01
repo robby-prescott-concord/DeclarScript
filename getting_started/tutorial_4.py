@@ -151,5 +151,5 @@ else :
     run_commands(the_root_command_list_linux_osx)
     print("weird platform: " + str(platform))
 
-# After Running the tut_4 python script:
+# After Running the tutorial_4 python script:
 # Take a look at the terminal output and see if you can follow what happened.

@@ -24,8 +24,8 @@ run_commands(hello_commands)
 # Open up a terminal and navigate to the :
 # >>> cd <some_file_path>/<your_DeclarScript_root_directory>/DeclarScript/getting_started"
 # Run each of these files like so:
-#     Windows:          $ tut_1.py
-#     Linux & OSX:      $ ./tut_1.py
+#     Windows:          $ tutorial_1.py
+#     Linux & OSX:      $ ./tutorial_1.py
 
 
 # After Running the tut_1 python script:

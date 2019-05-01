@@ -53,5 +53,5 @@ tutorial_2_commands = [
 # let's run it!
 run_commands(tutorial_2_commands)
 
-# After Running the tut_2 python script:
+# After Running the tutorial_2 python script:
 # Take a look at the terminal output and see if you can follow what happened.

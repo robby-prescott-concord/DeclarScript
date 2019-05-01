@@ -77,6 +77,6 @@ the_root_command_list = [
 # let's run it!
 run_commands(the_root_command_list)
 
-# After Running the tut_3 python script:
+# After Running the tutorial_3 python script:
 # Take a look at the terminal output and see if you can connect the terminal
 # output with the image of the tree and the branch traveral.
