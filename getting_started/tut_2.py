@@ -22,14 +22,14 @@ tutorial_2_commands = [
     Command('ps', 'List the current processes', critical=False),
 
     # retrying a command if it fails
-    Command('badbadbad', 'Bad command, it should fail...', retries=1, critical=False),
+    Command('qwertyuiop', 'Bad command, it should fail...', retries=1, critical=False),
 
     # making the setup around a command invisible
     Command('echo "I\'m invisible! \\(\'o\')/"', visible=False),
     Command('sleep 5', visible=False),
 
     # sleeping between retries (in seconds)
-    Command('bad but wait', 'Bad command, again.', sleep_between_retries=2, retries=3, critical=True),
+    Command('asdfghjkl', 'Bad command, again.', sleep_between_retries=2, retries=3, critical=True),
 
     # These commands won't be executed because the 'badbutwait' command was critical and failed.
     Command('wont be executed', 'The list will terminate before this command.'),
@@ -55,4 +55,3 @@ run_commands(tutorial_2_commands)
 
 # After Running the tut_2 python script:
 # Take a look at the terminal output and see if you can follow what happened.
-# by a "Final Summary". Each of these 4 commands should have been successful.

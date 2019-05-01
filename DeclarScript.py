@@ -128,7 +128,11 @@ class Command():
                         print(colored('sleep between retries has been set to ', 'yellow') + str(self.sleep_between_retries) + colored(' seconds. Waiting to execute...', 'yellow'))
                         time.sleep(self.sleep_between_retries)
 
-                print(colored("\n~" + self.message, 'magenta') + colored('\n' + branch_name + '>>> ', 'green') + colored(self.command, 'cyan'))
+                print(' ')
+                if self.message != '' :
+                    print(colored("~" + self.message, 'magenta'))
+
+                print(colored(branch_name + '>>> ', 'green') + colored(self.command, 'cyan'))
 
             times_tried += 1
             return_code = add_prompt_responses_and_run_command(self, branch_name)
