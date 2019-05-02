@@ -62,9 +62,9 @@ the_root_command_list = [
 #   |____(AAA)
 #          |____(BBB)
 #          |      |____(CCC)
-#          |      |      |____backup_list_that_critically_fail
-#          |      |
-#          |      |____(FFF)
+#          |      X      |____backup_list_that_critically_fails
+#          |      X
+#          |      XXXXX(FFF)
 #          |
 #          |____(EEE)
 #          |
@@ -72,7 +72,8 @@ the_root_command_list = [
 #                 |____backup_list_that_succeeds
 
 # The branch traversal order:
-# (root)=>(A)=>(B)=>(C)=>(B)=>(F)=>(B)=>(A)=>(E)=>(A)=>(D)=>(A)=>(root)
+# (root)=>(A)=>(B)=>(C)=>(B)=>(A)=>(E)=>(A)=>(D)=>(A)=>(root)
+# *Note: (F) Never gets executed since it comes after (C), and (C) fails critically.
 
 # let's run it!
 run_commands(the_root_command_list)

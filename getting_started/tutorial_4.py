@@ -23,62 +23,30 @@ from DeclarScript.DeclarScript import Command, run_commands
 
 # Let's look at an example:
 
-# The following 12 command lists are referenced by the return_code_backup_command_list
-
+# The following bunch command lists are referenced by the main return_code_backup_command_list
 return_code_1_backup = [
     Command('sleep 1', visible=False),
-    Command('echo "A partridge in a pear tree"'),
-    Command('sleep 3', visible=False)
+    Command('echo "A partridge in a pear tree"')
 ]
 
 return_code_2_backup = [
     Command('sleep 1', visible=False),
-    Command('sing "Two turtle doves and"', backup_command_list=return_code_1_backup, critical=False)
+    Command('echo "Two turtle doves and"')
 ]
 
 return_code_3_backup = [
     Command('sleep 1', visible=False),
-    Command('sing "Three French hens"', backup_command_list=return_code_2_backup, critical=False)
+    Command('echo "Three French hens"')
 ]
 
 return_code_4_backup = [
     Command('sleep 3', visible=False),
-    Command('sing "Four calling birds"', backup_command_list=return_code_3_backup, critical=False)
+    Command('echo "Four calling birds"')
 ]
 
 return_code_5_backup = [
     Command('sleep 1', visible=False),
-    Command('sing "Five gold rings"', backup_command_list=return_code_4_backup, critical=False)
-]
-
-return_code_6_backup = [
-    Command('sleep 1', visible=False),
-    Command('sing "Six geese a laying"', backup_command_list=return_code_5_backup, critical=False)
-]
-
-return_code_7_backup = [
-    Command('sleep 1', visible=False),
-    Command('sing "Seven swans a swimming"', backup_command_list=return_code_6_backup, critical=False)
-]
-
-return_code_8_backup = [
-    Command('sleep 1', visible=False),
-    Command('sing "Eight maids a milking"', backup_command_list=return_code_7_backup, critical=False)
-]
-
-return_code_9_backup = [
-    Command('sleep 1', visible=False),
-    Command('sing "Nine ladies dancing"', backup_command_list=return_code_8_backup, critical=False)
-]
-
-return_code_10_backup = [
-    Command('sleep 1', visible=False),
-    Command('sing "Ten lords a leaping"', backup_command_list=return_code_9_backup, critical=False)
-]
-
-return_code_11_backup = [
-    Command('sleep 1', visible=False),
-    Command('sing "Eleven pipers piping"', backup_command_list=return_code_10_backup, critical=False)
+    Command('echo "Five gold rings"')
 ]
 
 # This is how you declare a return_code_backup_command_list.
@@ -92,24 +60,34 @@ return_code_12_days_backups = [
     (3, return_code_3_backup),
     (4, return_code_4_backup),
     (5, return_code_5_backup),
-    (6, return_code_6_backup),
-    (7, return_code_7_backup),
-    (8, return_code_8_backup),
-    (9, return_code_9_backup),
-    (10, return_code_10_backup),
-    (11, return_code_11_backup),
 
     # You can also declare the associated backup_command_list within the
     # return_code_backup_command_list, as long as the backup_command_list
     # in question doesn't need to be referenced by anything else. This is
     # how you do it:
-    (12,[
-            Command('sleep 1', visible=False),
-            Command('sing "Twelve drummers drumming"', backup_command_list=return_code_11_backup, critical=False)
-        ]
-    )
+    (6, [ Command('sleep 1', visible=False),
+          Command('echo "Six geese a laying"') ]),
+
+    (7, [ Command('sleep 1', visible=False),
+          Command('echo "Seven swans a swimming"') ]),
+
+    (8, [ Command('sleep 1', visible=False),
+          Command('echo "Eight maids a milking"') ]),
+
+    (9, [ Command('sleep 1', visible=False),
+          Command('echo "Nine ladies dancing"') ]),
+
+    (10, [ Command('sleep 1', visible=False),
+           Command('echo "Ten lords a leaping"') ]),
+
+    (11, [ Command('sleep 1', visible=False),
+           Command('echo "Eleven pipers piping"') ]),
+
+    (12, [ Command('sleep 1', visible=False),
+           Command('echo "Twelve drummers drumming"') ])
 ]
 
+# Here's the default case if the numbers don't fall between 0 and 12
 default_backup_list = [
     Command('echo "This is the default catch-all backup list. Try entering a number 0 through 12..."')
 ]
@@ -120,7 +98,7 @@ default_backup_list = [
 #   linux & osx filepath: ./tutorial_resources/returncode.py
 #   windows filepath: tutorial_resources\returncode.py
 #
-# The good news is we can detect which os we're using within a python script. So the most
+# The good news is we can detect which os we're uwithin a python script. So the most
 # straightforward solution is to create different versions and run them accordingly.
 
 # linux and osx version
@@ -133,6 +111,7 @@ the_root_command_list_linux_osx = [
 
 # windows version
 the_root_command_list_windows = [
+    Command('cat */returncode.py', 'The contents of the python script we are calling.'),
     Command('echo "on the (return_code) day of Christmas, my true love gave to me..."'),
     Command('tutorial_resources\\returncode.py', return_code_backup_command_lists=return_code_12_days_backups, backup_command_list=default_backup_list),
     Command('echo "Success is boring! Let\'s see it fail by typing something other than 0..."')

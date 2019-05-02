@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
 import sys
-number = int(input("Enter a Return Code: "))
+print("Enter a Return Code: ")
+number = int(input())
 sys.exit(number)

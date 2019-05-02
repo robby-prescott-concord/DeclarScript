@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import fiximports
 from DeclarScript.DeclarScript import Command, run_commands
+import sys
+from sys import platform
 
 ### Tutorial 5 ###
 ### Automatically respond to terminal prompts ###
@@ -12,16 +14,22 @@ from DeclarScript.DeclarScript import Command, run_commands
 
 # First, let's feed the program some empty lists so it doesn't break.
 # ***(1)*** Try running the program now in this state
+
 userinput0_responses = []
 userinput1_responses = []
 userinput2_responses = []
 
-# ***(2)*** Once you've gotten sick of entering user input, uncomment the following
-# 3 lines to re-assign the automated responses correctly. Then run the program again.
+# ***(2)*** Once you've gotten sick of entering user input, run the code again
+# with the auto-respond flag. This is how the command should look:
 
-#userinput0_responses = ['Y', 'Y', '100', 'N', 'N', '6', 'Y', 'N', 'purple', '17']
-#userinput1_responses = ['5']
-#userinput2_responses = ['17', '16', '18', '288', '289', '17']
+#   linux & osx: './tutorial_5.py --auto-respond'
+#   windows:     'tutorial_5.py --auto-respond'
+
+# This checks to see if "--auto-respond" second command line argument
+if  len(sys.argv) > 1 and sys.argv[1] == '--auto-respond' :
+    userinput0_responses = [17, 16, 18, 288, 289, 17] # numbers can be strings, ints, or floats
+    userinput1_responses = [3]
+    userinput2_responses = ['Y', 'Y', '100', 'N', 'N', '6', 'Y', 'N', 'purple', '17']
 
 
 # linux and osx version
@@ -50,9 +58,6 @@ the_root_command_list_windows = [
     Command('tutorial_resources\\returncode.py', prompt_responses=['0'])
 ]
 
-# This is how you differentiate between operating systems:
-from sys import platform
-
 if platform == "linux" or platform == "linux2" :
     run_commands(the_root_command_list_linux_osx)
 elif platform == "darwin" :
@@ -63,5 +68,5 @@ else :
     run_commands(the_root_command_list_linux_osx)
     print("weird platform: " + str(platform))
 
-# After Running the tutorial_4 python script:
+# After Running the tutorial_5 python script:
 # Take a look at the terminal output and see if you can follow what happened.
