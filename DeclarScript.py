@@ -167,7 +167,7 @@ class Command():
             if times_tried > self.retries :
                 print_full_bar()
                 print_and_log([(' ', 'white')])
-                print_and_log([('Error with command: ', 'yellow'), (str(self.command), 'cyan')])
+                print_and_log([('Error with command: ', 'red'), (str(self.command), 'cyan')])
                 if (self.retries != 0) :
                     print_and_log([('Command retries exceeded... times_tried: ', 'yellow'), (str(times_tried), 'white'), (', retries allotted: ', 'yellow'), (str(self.retries), 'white')])
 
@@ -184,7 +184,7 @@ class Command():
                     print_and_log([(' ', 'white')])
                     print_and_log([('This failed command was not flagged as critical, so the list of commands will now continue where it left off.', 'yellow')])
                     print_and_log([('More specifically, the branch: "', 'yellow'), (branch_name, 'green'), ('" ...', 'yellow')])
-                    print_and_log([('...will continue with the following commands (if any) after the command: "', 'red'), (self.command, 'cyan'), ('".', 'yellow')])
+                    print_and_log([('...will continue with the following commands (if any) after the command: "', 'yellow'), (self.command, 'cyan'), ('".', 'yellow')])
                     return 1
 
             if self.visible :
@@ -241,9 +241,7 @@ def run_branch(commands, branch_name) :
     except KeyboardInterrupt:
         interrupted_commands.append(interupted_command)
         print_and_log([("KeyBoardInterrupt ...Exiting", 'yellow')])
-        if logfile_created :
-            logfile.close()
-        sys.exit(2)
+        pass
 
     print_full_bar()
     print_and_log([(' ', 'white')])

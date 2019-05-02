@@ -40,7 +40,7 @@ return_code_3_backup = [
 ]
 
 return_code_4_backup = [
-    Command('sleep 3', visible=False),
+    Command('sleep 1', visible=False),
     Command('echo "Four calling birds"')
 ]
 
